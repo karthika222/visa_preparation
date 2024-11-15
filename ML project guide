@@ -1,0 +1,151 @@
+# 🤖 Machine Learning Project Guide
+
+## 🎯 Purpose
+Quick reference guide for machine learning development workflows, best practices, and project structure.
+
+## 📁 Standard Project Structure
+```
+ml-project/
+│
+├── data/               # Data files
+│   ├── raw/           # Original data
+│   ├── processed/     # Cleaned data
+│   └── external/      # External source data
+│
+├── models/            # Trained models
+│   ├── saved_models/
+│   └── checkpoints/
+│
+├── notebooks/         # Jupyter notebooks
+│   ├── EDA.ipynb
+│   └── training.ipynb
+│
+├── src/              # Source code
+│   ├── data/         # Data processing
+│   ├── features/     # Feature engineering
+│   ├── models/       # Model definitions
+│   └── utils/        # Helper functions
+│
+├── tests/            # Unit tests
+├── configs/          # Configuration files
+├── requirements.txt  # Dependencies
+└── README.md
+```
+
+## 🚀 Getting Started
+
+1. **Environment Setup**
+   ```bash
+   python -m venv env
+   source env/bin/activate  # Windows: env\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. **Common Dependencies**
+   ```python
+   numpy==1.21.0
+   pandas==1.3.0
+   scikit-learn==0.24.2
+   torch==1.9.0
+   tensorflow==2.6.0
+   ```
+
+## 💻 Best Practices
+
+### Version Control
+- Use `.gitignore` for data and model files
+- Commit frequently with clear messages
+- Create branches for experiments
+
+### Data Management
+- Never commit raw data
+- Document data sources
+- Include data validation
+- Use data version control (DVC)
+
+### Code Quality
+- Follow PEP 8
+- Write unit tests
+- Use type hints
+- Document functions
+
+### Model Development
+- Log experiments
+- Save model checkpoints
+- Track metrics
+- Use config files
+
+## 🛠 Common Tools
+
+### Development
+- VS Code / PyCharm
+- Jupyter Lab
+- Git + GitHub
+
+### ML Frameworks
+- PyTorch
+- TensorFlow
+- Scikit-learn
+
+### MLOps
+- MLflow
+- Weights & Biases
+- DVC
+- Docker
+
+## 📊 Experiment Tracking
+
+```python
+# Example using MLflow
+import mlflow
+
+mlflow.start_run()
+mlflow.log_param("learning_rate", 0.01)
+mlflow.log_metric("accuracy", 0.95)
+mlflow.end_run()
+```
+
+## 🔍 Code Examples
+
+### Training Loop
+```python
+def train(model, train_loader, criterion, optimizer):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        optimizer.zero_grad()
+        output = model(data)
+        loss = criterion(output, target)
+        loss.backward()
+        optimizer.step()
+```
+
+### Model Evaluation
+```python
+def evaluate(model, test_loader):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            output = model(data)
+            pred = output.argmax(dim=1)
+            correct += pred.eq(target).sum().item()
+    return correct / len(test_loader.dataset)
+```
+
+## 📈 Maintenance
+
+- Regular dependency updates
+- Model retraining schedule
+- Performance monitoring
+- Documentation updates
+
+## 🤝 Contributing
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
+
+## 📝 License
+MIT License
